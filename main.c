@@ -6,7 +6,7 @@
 /*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:49:11 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/09 13:21:38 by pferrete         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:16:51 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr(char *s)
 {
 	int	i;
 
@@ -24,14 +24,31 @@ void	ft_putstr_fd(char *s, int fd)
 	i = 0;
 	while (s[i])
 	{
-		write(fd, &s[i], 1);
+		ft_putchar(s[i]);
 		i++;
 	}
 }
 
-void	ft_putchar_fd(char c, int fd)
+
+void	ft_putnbr(int n)
 {
-	write(fd, &c, 1);
+	if (n == -2147483648)
+		write(1, "-2147483648", 11);
+	else if (n == 0)
+		ft_putchar(n + 48);
+	else if (n < 0)
+	{
+		ft_putchar('-');
+		n *= -1;
+		ft_putnbr(n);
+	}
+	else if (n < 10)
+		ft_putchar(n + 48);
+	else
+	{
+		ft_putnbr(n / 10);
+		ft_putchar((char)(n % 10 + 48));
+	}
 }
 
 void	ft_checkprint(char c, va_list arg)
@@ -40,9 +57,9 @@ void	ft_checkprint(char c, va_list arg)
 
 	fd = 1;
 	if (c == 'c')
-		ft_putchar_fd(va_arg(arg, int), fd);
+		ft_putchar(va_arg(arg, int));
 	else if (c == 's')
-		ft_putstr_fd(va_arg(arg, char *), fd);
+		ft_putstr(va_arg(arg, char *));
 	else if (c == 'd')
 		printf("%s", "int");
 	else if (c == 'p')
@@ -69,13 +86,9 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-		{
-			i++;
-			ft_checkprint(format[i], args);
-		}
+			ft_checkprint(format[++i], args);
 		else
-			ft_putchar_fd(format[i], 1);
-	i++;
+			ft_putchar(format[i++]);
 	}
 	va_end(args);
 	return (0);
@@ -83,9 +96,9 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	ft_printf("%s", "ooooo");
-
-    //ft_printf("%s", "Hello, World");
+	ft_printf("Oioioi");
+	ft_printf("%c", 'o');
+	ft_printf("%s", "Hello, World");
     //ft_printf("%p", *p);
     //ft_printf("%d", );
     //ft_print_f("%i", );
