@@ -6,7 +6,7 @@
 /*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:49:11 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/09 12:32:32 by pferrete         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:21:38 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,34 @@
 #include <stdio.h>
 #include <string.h>
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
 
-void	ft_checkprint(char c, unsigned int ptr)
+void	ft_checkprint(char c, va_list arg)
 {
-	int fd;
+	int	fd;
 
 	fd = 1;
 	if (c == 'c')
-		ft_putchar_fd(ptr, fd);
-	//else if (c == 's')
-		//ft_putstr_fd(ptr, fd);
+		ft_putchar_fd(va_arg(arg, int), fd);
+	else if (c == 's')
+		ft_putstr_fd(va_arg(arg, char *), fd);
 	else if (c == 'd')
 		printf("%s", "int");
 	else if (c == 'p')
@@ -48,7 +62,6 @@ void	ft_checkprint(char c, unsigned int ptr)
 int	ft_printf(const char *format, ...)
 {
 	int				i;
-	unsigned int	ptr;
 	va_list			args;
 
 	va_start (args, format);
@@ -58,8 +71,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			ptr = va_arg(args, unsigned int);
-			ft_checkprint(format[i], ptr);
+			ft_checkprint(format[i], args);
 		}
 		else
 			ft_putchar_fd(format[i], 1);
@@ -69,9 +81,9 @@ int	ft_printf(const char *format, ...)
 	return (0);
 }
 
-int    main(void)
+int	main(void)
 {
-    ft_printf("%c", 'o');
+	ft_printf("%s", "ooooo");
 
     //ft_printf("%s", "Hello, World");
     //ft_printf("%p", *p);
