@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paola <paola@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 12:00:14 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/14 12:31:18 by paola            ###   ########.fr       */
+/*   Created: 2023/05/14 16:41:22 by paola             #+#    #+#             */
+/*   Updated: 2023/05/14 16:41:36 by paola            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_putstr(char *s)
 {
-	int				i;
-	va_list			args;
+	int	i;
 
-	va_start (args, format);
+	if (!s)
+		return ;
 	i = 0;
-	while (format[i])
+	while (s[i])
 	{
-		if (format[i] == '%')
-			ft_checkprint(format[++i], args);
-		else
-			ft_putchar(format[i++]);
+		ft_putchar(s[i]);
+		i++;
 	}
-	va_end(args);
-	return (0);
 }

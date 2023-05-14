@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paola <paola@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 12:00:14 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/14 12:31:18 by paola            ###   ########.fr       */
+/*   Created: 2023/05/14 13:57:55 by paola             #+#    #+#             */
+/*   Updated: 2023/05/14 15:30:02 by paola            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_puthex(unsigned int h)
 {
-	int				i;
-	va_list			args;
+	char	*hex;
 
-	va_start (args, format);
-	i = 0;
-	while (format[i])
+	hex = "0123456789abcdef";
+	if (h >= 16)
 	{
-		if (format[i] == '%')
-			ft_checkprint(format[++i], args);
-		else
-			ft_putchar(format[i++]);
+		ft_puthex(h / 16);
+		write(1, &hex[h % 16], 1);
 	}
-	va_end(args);
-	return (0);
+	else if (h < 16)
+		write(1, &hex[h % 16], 1);
 }

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putunsig.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paola <paola@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 12:00:14 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/14 12:31:18 by paola            ###   ########.fr       */
+/*   Created: 2023/05/14 12:30:48 by paola             #+#    #+#             */
+/*   Updated: 2023/05/14 12:31:07 by paola            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_putunsig(unsigned int n)
 {
-	int				i;
-	va_list			args;
-
-	va_start (args, format);
-	i = 0;
-	while (format[i])
+	if (n < 10)
+		ft_putchar(n + 48);
+	else
 	{
-		if (format[i] == '%')
-			ft_checkprint(format[++i], args);
-		else
-			ft_putchar(format[i++]);
+		ft_putunsig(n / 10);
+		ft_putchar((char)(n % 10 + 48));
 	}
-	va_end(args);
-	return (0);
 }
