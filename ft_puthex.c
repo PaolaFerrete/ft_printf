@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paola <paola@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 13:57:55 by paola             #+#    #+#             */
-/*   Updated: 2023/05/14 15:30:02 by paola            ###   ########.fr       */
+/*   Updated: 2023/05/15 18:21:33 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_puthex(unsigned int h)
+void	ft_puthex(unsigned int h, char c, size_t *len)
 {
 	char	*hex;
 
-	hex = "0123456789abcdef";
+	if (c == 'x')
+		hex = "0123456789abcdef";
+	else if (c == 'X')
+		hex = "0123456789ABCDEF";
 	if (h >= 16)
 	{
-		ft_puthex(h / 16);
-		write(1, &hex[h % 16], 1);
+		ft_puthex(h / 16, c, len);
+		ft_putchar((hex[h % 16]), len);
 	}
 	else if (h < 16)
-		write(1, &hex[h % 16], 1);
+		ft_putchar((hex[h % 16]), len);
 }

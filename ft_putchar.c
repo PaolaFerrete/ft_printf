@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paola <paola@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:41:58 by paola             #+#    #+#             */
-/*   Updated: 2023/05/14 16:42:37 by paola            ###   ########.fr       */
+/*   Updated: 2023/05/15 18:24:20 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_putchar(char c)
+void	ft_putchar(char c, size_t *len)
 {
 	write(1, &c, 1);
+	(*len)++;
 }
-
