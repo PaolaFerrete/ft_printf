@@ -6,7 +6,7 @@
 /*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:49:11 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/15 18:20:35 by pferrete         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:18:19 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	ft_putchar(char c, size_t *len)
 {
@@ -27,7 +27,10 @@ void	ft_putstr(char *s, size_t *len)
 	int	i;
 
 	if (!s)
-		ft_putstr("(nil)", len);
+	{
+		ft_putstr("(null)", len);
+		return ;
+	}
 	i = 0;
 	while (s[i])
 	{
@@ -152,7 +155,20 @@ int	main(void)
 {
 	int	lenft = 0;
 	int	lenprintf = 0;
+/*
 
+	ft_printf(" NULL %s NULL ", NULL);
+	printf("\n");
+*/
+
+
+/*
+	lenprintf = printf("\n");
+	printf("%d\n", lenprintf);
+	lenft = ft_printf("\n");
+➜  ft_printf git:(master) ✗
+	printf("%d\n", lenft);
+*/
 /*
 	printf("PRINTF ->\n");
 	lenprintf = printf("Oioioi");
@@ -163,8 +179,8 @@ int	main(void)
 	printf("\n");
 	printf("O tamanho: %d", lenft);
 	printf("\n");
-*/
-/*
+
+
 	printf("PRINTF ->\n");
 	lenprintf = printf("%c", 'o');
 	printf("\n");
@@ -174,14 +190,16 @@ int	main(void)
 	printf("\n");
 	printf("O tamanho: %d", lenft);
 	printf("\n");
-*/
-/*
-	printf("PRINTF -> ");
-	lenprintf = printf("|| %s", "Hello, World");
+
+
+	printf("PRINTF -> || ");
+	lenprintf = printf("%s", "Hello, World");
 	printf(" || %d\n", lenprintf);
-	printf("FT_PRINTF -> ||");
+	ft_printf("FT_PRINTF -> || ");
 	lenft = ft_printf("%s", "Hello, World");
-	printf(" || %d\n", lenft);
+	ft_printf(" || %d", lenft);
+	printf("\n\n");
+
 */
 /*
 
@@ -325,7 +343,7 @@ int	main(void)
 	printf("\n\n");
 */
 
-/*
+
 	void	*ptr = NULL;
 	void	*p = "string";
 	void	*t = "oioioi";
@@ -353,6 +371,6 @@ int	main(void)
 	lenft = ft_printf("%p", t);
 	ft_printf(" || %d", lenft);
 	printf("\n\n");
-	*/
+
 
 }

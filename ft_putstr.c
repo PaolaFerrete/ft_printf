@@ -6,18 +6,21 @@
 /*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:41:22 by paola             #+#    #+#             */
-/*   Updated: 2023/05/15 18:23:55 by pferrete         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:18:49 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	ft_putstr(char *s, size_t *len)
 {
 	int	i;
 
 	if (!s)
-		ft_putstr("(nil)", len);
+	{
+		ft_putstr("(null)", len);
+		return ;
+	}
 	i = 0;
 	while (s[i])
 	{
