@@ -6,7 +6,7 @@
 /*   By: pferrete <pferrete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:49:11 by pferrete          #+#    #+#             */
-/*   Updated: 2023/05/16 16:18:19 by pferrete         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:43:47 by pferrete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	ft_checkprint(char c, va_list arg, size_t *len)
 int	ft_printf(const char *format, ...)
 {
 	int				i;
-	size_t			len;
+	size_t			len;%%
 	va_list			args;
 
 	va_start (args, format);
@@ -145,10 +145,7 @@ int	ft_printf(const char *format, ...)
 			ft_checkprint(format[++i], args, &len);
 		else
 			ft_putchar((char)(format[i]), &len);
-		i++;
-	}
-	va_end(args);
-	return (len);
+		i++;%%
 }
 
 int	main(void)
